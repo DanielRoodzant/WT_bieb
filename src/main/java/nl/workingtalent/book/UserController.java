@@ -18,12 +18,12 @@ public class UserController {
 	@Autowired
 	private UserService Service;
 	
-	@RequestMapping(value="register", method = RequestMethod.POST)
+	@RequestMapping(value="user/register", method = RequestMethod.POST)
 	public User register(@RequestBody User user) {
 		return Service.registerUser(user);
 	}
 	
-	@RequestMapping(value="delete/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value="user/delete/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Integer id) {
 		Optional<User> user = Service.findById(id);
         Service.userDelete(user.get());
