@@ -1,6 +1,6 @@
 package nl.workingtalent.book;
 
-
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +18,28 @@ public class UserController {
 	@Autowired
 	private UserService Service;
 	
+	@RequestMapping(value="user")
+	public List<User> demo() {
+		return Service.printUserList();
+	}
+	
 	@RequestMapping(value="user/register", method = RequestMethod.POST)
 	public User register(@RequestBody User user) {
 		return Service.registerUser(user);
+	}
+	
+	@RequestMapping(value="user/update/{id}", method = RequestMethod.PUT)
+	public void update(@PathVariable Integer id, @RequestBody User user) {
+		Optional<User> optional = Service.findById(id);
+		User p = optional.get();
+		
+		p.setFirstName(user.getFirstName());
+		p.setLastName(user.getLastName());
+		p.setPassword(user.getPassword());
+		p.setEmail(user.getEmail());
+		p.setAdmin(user.isAdmin());
+		
+		Service.registerUser(p);
 	}
 	
 	@RequestMapping(value="user/delete/{id}", method = RequestMethod.DELETE)

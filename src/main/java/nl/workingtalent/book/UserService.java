@@ -24,10 +24,8 @@ public class UserService {
 		return repo.save(user);
 	}
 	
-	
 	public void userDelete(User user) {
         repo.delete(user);
     }
-	
 	
 }
