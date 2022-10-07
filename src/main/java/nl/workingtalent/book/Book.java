@@ -26,12 +26,12 @@ public class Book {
 	
 	@Column (length = 200, nullable = false)
 	private int isbn;
+	
+	private boolean archived;
 
 	//many-to-many
 	@ManyToMany(cascade = CascadeType.REMOVE)
-	private List<BookLabel> bookLabels;
-	
-	
+	private List<BookLabel> bookLabels;	
 	
 	public List<BookLabel> getBookLabels() {
 		return bookLabels;
@@ -74,4 +74,11 @@ public class Book {
 		this.isbn = isbn;
 	}
 	
+	public boolean isArchived() {
+		return archived;
+	}
+
+	public void setArchived(boolean archived) {
+		this.archived = archived;
+	}
 }

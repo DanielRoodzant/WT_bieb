@@ -33,9 +33,15 @@ public class BookController {
 		Optional<Book> optional = Service.findById(id);
 		Book p = optional.get();
 		
-		p.setTitle(book.getTitle());
-		p.setAuthor(book.getAuthor());
-		p.setIsbn(book.getIsbn());
+		if(book.getTitle().length() > 0) {
+			p.setTitle(book.getTitle());
+		}
+		if(book.getAuthor().length() > 0) {
+			p.setAuthor(book.getAuthor());
+		}
+		if(book.getIsbn() > 0) {
+			p.setIsbn(book.getIsbn());
+		}
 		
 		Service.registerBook(p);
 	}
@@ -45,4 +51,17 @@ public class BookController {
 		Optional<Book> book = Service.findById(id);
         Service.bookDelete(book.get());
     }
+	
+	@RequestMapping(value="book/archive/{id}", method = RequestMethod.PUT)
+	public void archive(@PathVariable Integer id) {
+		Optional<Book> optional = Service.findById(id);
+		Book p = optional.get();
+		
+		if(p.isArchived() == false) {
+			p.setArchived(true);
+		}else {
+			p.setArchived(false);
+		}
+		Service.registerBook(p);
+	}
 }

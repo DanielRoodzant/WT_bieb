@@ -28,10 +28,8 @@ public class User {
 	@Column(length = 200, nullable = false)
 	private String password;
 	
-	
 	private boolean admin;
 
-	
 	public int getUserId() {
 		return userId;
 	}

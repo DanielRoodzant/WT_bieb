@@ -33,11 +33,18 @@ public class UserController {
 		Optional<User> optional = Service.findById(id);
 		User p = optional.get();
 		
-		p.setFirstName(user.getFirstName());
-		p.setLastName(user.getLastName());
-		p.setPassword(user.getPassword());
-		p.setEmail(user.getEmail());
-		p.setAdmin(user.isAdmin());
+		if(user.getFirstName().length() > 0){
+			p.setFirstName(user.getFirstName());
+		}
+		if(user.getLastName().length() > 0){
+			p.setLastName(user.getLastName());
+		}
+		if(user.getPassword().length() > 0){
+			p.setPassword(user.getPassword());
+		}
+		if(user.getEmail().length() > 0) {
+			p.setEmail(user.getEmail());
+		}
 		
 		Service.registerUser(p);
 	}
