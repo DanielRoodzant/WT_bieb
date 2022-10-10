@@ -1,10 +1,14 @@
 package nl.workingtalent.book;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 // @Entity: moet 1 van kolommen zijn in database, anders geen koppeling database
 @Entity
@@ -30,6 +34,13 @@ public class User {
 	
 	private boolean admin;
 
+	
+	//many-to-many
+	//many-to-many koppelen*************
+	@ManyToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+	private List<Lent> lent;
+	
+	
 	public int getUserId() {
 		return userId;
 	}
