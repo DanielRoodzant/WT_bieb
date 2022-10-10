@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-
-
 @Entity
 public class BookLabel {
 
@@ -26,22 +24,18 @@ public class BookLabel {
 	@ManyToMany(cascade = CascadeType.REMOVE, mappedBy = "bookLabels")
 	private List<Book> books;
 	
-	
+	//getters/setters (methods)
 	public List<Book> getBooks() {
 		return books;
 	}
-
 
 	public void setBooks(List<Book> books) {
 		this.books = books;
 	}
 
-
-	//getters/setters (methods)
 	public int getBookLabelId() {
 		return bookLabelId;
 	}
-	
 
 	public void setBookLabelId(int bookLabelId) {
 		this.bookLabelId = bookLabelId;
