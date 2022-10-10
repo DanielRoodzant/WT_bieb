@@ -8,7 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 // @Entity: moet 1 van kolommen zijn in database, anders geen koppeling database
 @Entity
@@ -18,6 +19,11 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
+	
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Reservation.class)
+	@JoinColumn(name = "user_id")
+	private List<Reservation> userIdList;
+	
 	
 // @column:	columnlength en of waarde null mag zijn (false=altijd first name)
 	@Column(length = 100, nullable = false)
@@ -33,12 +39,6 @@ public class User {
 	private String password;
 	
 	private boolean admin;
-
-	
-	//many-to-many
-	//many-to-many koppelen*************
-	@ManyToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
-	private List<Lent> lent;
 	
 	
 	public int getUserId() {
@@ -88,5 +88,14 @@ public class User {
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
+
+	public List<Reservation> getUserIdList() {
+		return userIdList;
+	}
+
+	public void setUserIdList(List<Reservation> userIdList) {
+		this.userIdList = userIdList;
+	}
+
 	
 }

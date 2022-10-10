@@ -20,11 +20,11 @@ public class BookLabel {
 	@Column(length = 200, nullable = false)
 	private String name;
 	
-	//many-to-many koppelen
+	// Many-to-many connection
 	@ManyToMany(cascade = CascadeType.REMOVE, mappedBy = "bookLabels")
 	private List<Book> books;
 	
-	//getters/setters (methods)
+	// Getters & setters (methods)
 	public List<Book> getBooks() {
 		return books;
 	}

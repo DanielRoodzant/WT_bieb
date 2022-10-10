@@ -29,10 +29,11 @@ public class Book {
 	
 	private boolean archived;
 
-	//many-to-many
+	// Many-to-many connection
 	@ManyToMany(cascade = CascadeType.REMOVE)
 	private List<BookLabel> bookLabels;	
 	
+	// Getters & setters
 	public List<BookLabel> getBookLabels() {
 		return bookLabels;
 	}
