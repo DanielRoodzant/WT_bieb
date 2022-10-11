@@ -1,6 +1,8 @@
 package nl.workingtalent.book;
 
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,10 +20,18 @@ public class Reservation {
 	@Column(name = "user_id")
 	private int userId;
 
+	@Column(name ="book_id")
+	private int bookId;
+	
+	
+	private LocalDate date = LocalDate.now();
+	
+	
+	
 	public int getReservationId() {
 		return reservationId;
 	}
-
+	
 	public void setReservationId(int reservationId) {
 		this.reservationId = reservationId;
 	}
@@ -34,6 +44,26 @@ public class Reservation {
 		this.userId = userId;
 	}
 
+	public int getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
+
+	
+
+	
 	
 	
 	

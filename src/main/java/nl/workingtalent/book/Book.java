@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Book {
@@ -16,6 +18,14 @@ public class Book {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int bookId;
+	
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Reservation.class)
+	@JoinColumn(name = "book_id")
+	private List<Reservation> bookIdList;
+	
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Copy.class)
+	@JoinColumn(name = "book_copy_id")
+	private List<Copy> copyIdList;
 	
 	
 	@Column (length = 200, nullable = false)
