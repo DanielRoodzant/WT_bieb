@@ -1,16 +1,10 @@
 package nl.workingtalent.book;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Lent {
@@ -26,10 +20,6 @@ public class Lent {
 	
 	private boolean archived;
 
-	//one-to-many
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = Copy.class)
-	@JoinColumn(name = "book_copy_id")
-	private List<Copy> copyIdList;
 	
 	//getters en setters
 	public int getLentId() {

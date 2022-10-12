@@ -25,8 +25,12 @@ public class User {
 	private List<Reservation> userIdList;
 	
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Lent.class)
-	@JoinColumn(name = "lent_id")
+	@JoinColumn(name = "lentId")
 	private List<Lent> lentIdList;
+	
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Returned.class)
+	@JoinColumn(name = "returnedId")
+	private List<Returned> returnedIdList;
 	
 	
 // @column:	columnlength en of waarde null mag zijn (false=altijd first name)
