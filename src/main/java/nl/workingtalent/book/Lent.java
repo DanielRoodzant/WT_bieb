@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Lent {
@@ -24,29 +26,10 @@ public class Lent {
 	
 	private boolean archived;
 
-
-	//one-to-many: userId(1) en copyId(2)
-	@ManyToMany(cascade = CascadeType.REMOVE)
-	private List<User> user;	
-	
-	public List<User> user() {
-		return user;
-	}
-
-	public void setBookLabels(List<User> user) {
-		this.user = user;
-	}
-	//copyId(2)--> nog toevoegen
-	//@ManyToMany(cascade = CascadeType.REMOVE)
-	//private List<User> user;	
-	//
-	//public List<User> user() {
-	//	return user;
-	//}
-	//
-	//public void setBookLabels(List<User> user) {
-	//	this.user = user;
-	//}
+	//one-to-many
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Copy.class)
+	@JoinColumn(name = "book_copy_id")
+	private List<Copy> copyIdList;
 	
 	//getters en setters
 	public int getLentId() {

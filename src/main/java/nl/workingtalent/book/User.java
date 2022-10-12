@@ -24,6 +24,10 @@ public class User {
 	@JoinColumn(name = "user_id")
 	private List<Reservation> userIdList;
 	
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Lent.class)
+	@JoinColumn(name = "lent_id")
+	private List<Lent> lentIdList;
+	
 	
 // @column:	columnlength en of waarde null mag zijn (false=altijd first name)
 	@Column(length = 100, nullable = false)
