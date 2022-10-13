@@ -1,14 +1,10 @@
 package nl.workingtalent.book;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Lent {
@@ -23,31 +19,19 @@ public class Lent {
 	//checken: date is string?
 	
 	private boolean archived;
-
-
-	//one-to-many: userId(1) en copyId(2)
-	@ManyToMany(cascade = CascadeType.REMOVE)
-	private List<User> user;	
 	
-	public List<User> user() {
-		return user;
+	@Column(name = "copy_id", nullable = false)
+	private int lentIdcopy;
+
+	
+	public int getLentIdcopy() {
+		return lentIdcopy;
 	}
 
-	public void setBookLabels(List<User> user) {
-		this.user = user;
+	public void setLentIdcopy(int lentIdcopy) {
+		this.lentIdcopy = lentIdcopy;
 	}
-	//copyId(2)--> nog toevoegen
-	//@ManyToMany(cascade = CascadeType.REMOVE)
-	//private List<User> user;	
-	//
-	//public List<User> user() {
-	//	return user;
-	//}
-	//
-	//public void setBookLabels(List<User> user) {
-	//	this.user = user;
-	//}
-	
+
 	//getters en setters
 	public int getLentId() {
 		return lentId;
