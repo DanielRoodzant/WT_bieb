@@ -18,6 +18,31 @@ public class Copy {
 	
 	@Column(nullable = false)
 	private int copyNr;
+
+	public int getCopyId() {
+		return copyId;
+	}
+
+	public void setCopyId(int copyId) {
+		this.copyId = copyId;
+	}
+
+	public int getBookCopyId() {
+		return bookCopyId;
+	}
+
+	public void setBookCopyId(int bookCopyId) {
+		this.bookCopyId = bookCopyId;
+	}
+
+	public int getCopyNr() {
+		return copyNr;
+	}
+
+	public void setCopyNr(int copyNr) {
+		this.copyNr = copyNr;
+	}
+	
 	
 
 }
