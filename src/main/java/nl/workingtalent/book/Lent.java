@@ -19,8 +19,19 @@ public class Lent {
 	//checken: date is string?
 	
 	private boolean archived;
+	
+	@Column(name = "copy_id", nullable = false)
+	private int lentIdcopy;
 
 	
+	public int getLentIdcopy() {
+		return lentIdcopy;
+	}
+
+	public void setLentIdcopy(int lentIdcopy) {
+		this.lentIdcopy = lentIdcopy;
+	}
+
 	//getters en setters
 	public int getLentId() {
 		return lentId;

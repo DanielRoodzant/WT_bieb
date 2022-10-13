@@ -19,7 +19,7 @@ public class Copy {
 	private int copyId;
 	
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Lent.class)
-	@JoinColumn(name = "lentId")
+	@JoinColumn(name = "copy_id")
 	private List<Lent> lentIdList;
 	
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Returned.class)
@@ -31,6 +31,48 @@ public class Copy {
 	
 	@Column(nullable = false)
 	private int copyNr;
+
+	public int getCopyId() {
+		return copyId;
+	}
+
+	public void setCopyId(int copyId) {
+		this.copyId = copyId;
+	}
+
+	public List<Lent> getLentIdList() {
+		return lentIdList;
+	}
+
+	public void setLentIdList(List<Lent> lentIdList) {
+		this.lentIdList = lentIdList;
+	}
+
+	public List<Returned> getReturnedIdList() {
+		return returnedIdList;
+	}
+
+	public void setReturnedIdList(List<Returned> returnedIdList) {
+		this.returnedIdList = returnedIdList;
+	}
+
+	public int getBookCopyId() {
+		return bookCopyId;
+	}
+
+	public void setBookCopyId(int bookCopyId) {
+		this.bookCopyId = bookCopyId;
+	}
+
+	public int getCopyNr() {
+		return copyNr;
+	}
+
+	public void setCopyNr(int copyNr) {
+		this.copyNr = copyNr;
+	}
+	
+	
 	
 	
 
