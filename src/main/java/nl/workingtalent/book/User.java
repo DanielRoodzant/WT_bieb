@@ -32,8 +32,7 @@ public class User {
 	@JoinColumn(name = "returnedId")
 	private List<Returned> returnedIdList;
 	
-	
-// @column:	columnlength en of waarde null mag zijn (false=altijd first name)
+	// @column:	columnlength en of waarde null mag zijn (false=altijd first name)
 	@Column(length = 100, nullable = false)
 	private String firstName;
 	
