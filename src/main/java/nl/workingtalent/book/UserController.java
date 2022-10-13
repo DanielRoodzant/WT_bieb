@@ -23,6 +23,11 @@ public class UserController {
 		return Service.printUserList();
 	}
 	
+	@RequestMapping(value="user/{id}")
+	public Optional<User> findUser(@PathVariable Integer id) {
+		return Service.findById(id);
+	}
+	
 	@RequestMapping(value="user/register", method = RequestMethod.POST)
 	public User register(@RequestBody User user) {
 		return Service.registerUser(user);
