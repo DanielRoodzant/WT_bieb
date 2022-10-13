@@ -64,4 +64,14 @@ public class BookController {
 		}
 		Service.registerBook(p);
 	}
+	
+	@RequestMapping(value="book/addLabel/{id}", method = RequestMethod.PUT)
+	public void addLabel(@PathVariable Integer id, @RequestBody Book book) {
+		Optional<Book> optional = Service.findById(id);
+		Book p = optional.get();
+		
+		p.setBookLabels(book.getBookLabels());
+		
+		Service.registerBook(p);
+	}
 }

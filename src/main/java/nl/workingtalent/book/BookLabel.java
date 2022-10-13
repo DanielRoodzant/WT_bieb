@@ -21,7 +21,7 @@ public class BookLabel {
 	private String name;
 	
 	// Many-to-many connection
-	@ManyToMany(cascade = CascadeType.REMOVE, mappedBy = "bookLabels")
+	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "bookLabels")
 	private List<Book> books;
 	
 	// Getters & setters (methods)

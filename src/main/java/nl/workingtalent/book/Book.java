@@ -40,7 +40,7 @@ public class Book {
 	private boolean archived;
 
 	// Many-to-many connection
-	@ManyToMany(cascade = CascadeType.REMOVE)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	private List<BookLabel> bookLabels;	
 	
 	// Getters & setters
@@ -52,7 +52,6 @@ public class Book {
 		this.bookLabels = bookLabels;
 	}
 
-	//getter/setter
 	public int getBookId() {
 		return bookId;
 	}

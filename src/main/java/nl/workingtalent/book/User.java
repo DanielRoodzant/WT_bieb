@@ -24,7 +24,6 @@ public class User {
 	@JoinColumn(name = "user_id")
 	private List<Reservation> userIdList;
 	
-	
 // @column:	columnlength en of waarde null mag zijn (false=altijd first name)
 	@Column(length = 100, nullable = false)
 	private String firstName;
