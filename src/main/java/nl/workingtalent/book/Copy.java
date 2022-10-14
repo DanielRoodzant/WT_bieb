@@ -23,7 +23,7 @@ public class Copy {
 	private List<Lent> lentIdList;
 	
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Returned.class)
-	@JoinColumn(name = "returnedId")
+	@JoinColumn(name = "copy_id")
 	private List<Returned> returnedIdList;
 	
 	@Column(name = "book_copy_id")
