@@ -32,6 +32,7 @@ public class Copy {
 	@Column(nullable = false)
 	private int copyNr;
 
+	// getters & setters
 	public int getCopyId() {
 		return copyId;
 	}
