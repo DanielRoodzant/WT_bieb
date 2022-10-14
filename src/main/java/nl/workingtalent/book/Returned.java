@@ -23,6 +23,9 @@ public class Returned {
 	//checken: date is string?
 	
 	private boolean archived;
+	
+	@Column(name = "copy_id", nullable = false)
+	private int ReservationIdcopy;
 
 
 	//one-to-many: userId(1) en copyId(2)
