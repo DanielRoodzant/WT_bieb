@@ -3,9 +3,9 @@ package nl.workingtalent.book;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import de.codecentric.boot.admin.server.config.EnableAdminServer;
+//import de.codecentric.boot.admin.server.config.EnableAdminServer;
 
-@EnableAdminServer
+//@EnableAdminServer
 @SpringBootApplication
 public class BookApplication{
 
