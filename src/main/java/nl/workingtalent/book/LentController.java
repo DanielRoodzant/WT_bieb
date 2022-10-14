@@ -24,7 +24,7 @@ public class LentController {
 	}
 	
 	@RequestMapping(value="lent/user/{id}")
-	public Optional<Lent> findLent(@PathVariable Integer id) {
+	public List<Lent> findLent(@PathVariable Integer id) {
 		return Service.findByUser(id);
 	}
 	

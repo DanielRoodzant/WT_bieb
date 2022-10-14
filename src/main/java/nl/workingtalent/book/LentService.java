@@ -20,7 +20,7 @@ public class LentService {
 		return repo.findById(id);
 	}
 	
-	public Optional<Lent> findByUser(Integer id){
+	public List<Lent> findByUser(Integer id){
 		return repo.findByUserId(id);
 	}
 	
