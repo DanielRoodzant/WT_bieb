@@ -23,6 +23,11 @@ public class LentController {
 		return Service.printLentList();
 	}
 	
+	@RequestMapping(value="lent/user/{id}")
+	public Optional<Lent> findLent(@PathVariable Integer id) {
+		return Service.findByUser(id);
+	}
+	
 	@RequestMapping(value="Lent/register", method = RequestMethod.POST)
 	public Lent register(@RequestBody Lent lent) {
 		return Service.registerLent(lent);
@@ -46,17 +51,5 @@ public class LentController {
 		Optional<Lent> lent = Service.findById(id);
         Service.lentDelete(lent.get());
     }
-	
-	@RequestMapping(value="lent/archive/{id}", method = RequestMethod.PUT)
-	public void archive(@PathVariable Integer id) {
-		Optional<Lent> optional = Service.findById(id);
-		Lent p = optional.get();
-		
-		if(p.isArchived() == false) {
-			p.setArchived(true);
-		}else {
-			p.setArchived(false);
-		}
-		Service.registerLent(p);
-	}
+
 }

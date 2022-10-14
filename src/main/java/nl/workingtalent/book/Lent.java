@@ -14,22 +14,31 @@ public class Lent {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int lentId;
 	
-	@Column (length = 10, nullable = false)
+	@Column(name = "user_id", length = 6, nullable = false)
+	private int userId;
+	
+	@Column(length = 10, nullable = false)
 	private String date;
 	//checken: date is string?
-	
-	private boolean archived;
-	
+		
 	@Column(name = "copy_id", nullable = false)
-	private int lentIdcopy;
+	private int copyId;
 
-	
-	public int getLentIdcopy() {
-		return lentIdcopy;
+	// Getters & setters
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setLentIdcopy(int lentIdcopy) {
-		this.lentIdcopy = lentIdcopy;
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getLentIdcopy() {
+		return copyId;
+	}
+
+	public void setLentIdcopy(int copyId) {
+		this.copyId = copyId;
 	}
 
 	//getters en setters
@@ -49,12 +58,4 @@ public class Lent {
 		this.date = date;
 	}
 
-	public boolean isArchived() {
-		return archived;
-	}
-
-	public void setArchived(boolean archived) {
-		this.archived = archived;
-	}
-		
 }

@@ -20,6 +20,10 @@ public class LentService {
 		return repo.findById(id);
 	}
 	
+	public Optional<Lent> findByUser(Integer id){
+		return repo.findByUserId(id);
+	}
+	
 	public Lent registerLent(Lent lent) {
 		return repo.save(lent);
 	}

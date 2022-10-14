@@ -25,7 +25,7 @@ public class User {
 	private List<Reservation> userIdList;
 	
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Lent.class)
-	@JoinColumn(name = "lentId")
+	@JoinColumn(name = "user_id")
 	private List<Lent> lentIdList;
 	
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Returned.class)
