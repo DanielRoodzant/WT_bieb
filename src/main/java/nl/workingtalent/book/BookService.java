@@ -27,7 +27,9 @@ public class BookService {
 	public void bookDelete(Book book) {
         repo.delete(book);
     }
-	
 
+	public List<Book> search(String search) {
+		return repo.findByTitleLikeOrAuthorLike("%" + search + "%", "%" + search + "%");
+	}
 
 }

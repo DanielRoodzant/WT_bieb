@@ -19,11 +19,11 @@ public class Book {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int bookId;
 	
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = Reservation.class)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "book_id")
 	private List<Reservation> bookIdList;
 	
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = Copy.class)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "book_copy_id")
 	private List<Copy> copyIdList;
 	
