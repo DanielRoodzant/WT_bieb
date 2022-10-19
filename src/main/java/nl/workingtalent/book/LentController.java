@@ -18,6 +18,9 @@ public class LentController {
 	@Autowired
 	private LentService Service;
 	
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping(value="lent")
 	public List<Lent> demo() {
 		return Service.printLentList();
@@ -25,7 +28,12 @@ public class LentController {
 	
 	@RequestMapping(value="lent/user/{id}")
 	public List<Lent> findLent(@PathVariable Integer id) {
-		return Service.findByUser(id);
+		Optional<User> optional = userService.findById(id);
+		if (optional.isPresent()) {
+			return optional.get().getLents();
+		}
+
+		return null;
 	}
 	
 	@RequestMapping(value="Lent/register", method = RequestMethod.POST)
@@ -37,9 +45,9 @@ public class LentController {
 	public void update(@PathVariable Integer id, @RequestBody Lent lent) {
 		Optional<Lent> optional = Service.findById(id);
 		Lent p = optional.get();
-		
-		if(lent.getDate().length() > 0) {
-			p.setDate(lent.getDate());
+
+		if(lent.getLentDateTime() != null) {
+			p.setLentDateTime(lent.getLentDateTime());
 		}
 	
 		

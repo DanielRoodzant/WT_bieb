@@ -2,13 +2,11 @@ package nl.workingtalent.book;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 // @Entity: moet 1 van kolommen zijn in database, anders geen koppeling database
@@ -19,18 +17,6 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
-	
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = Reservation.class)
-	@JoinColumn(name = "user_id")
-	private List<Reservation> userIdList;
-	
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = Lent.class)
-	@JoinColumn(name = "user_id")
-	private List<Lent> lentIdList;
-	
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = Returned.class)
-	@JoinColumn(name = "returnedId")
-	private List<Returned> returnedIdList;
 	
 	// @column:	columnlength en of waarde null mag zijn (false=altijd first name)
 	@Column(length = 100, nullable = false)
@@ -46,7 +32,18 @@ public class User {
 	private String password;
 	
 	private boolean admin;
+
 	
+	// Relations
+	
+	@OneToMany(mappedBy = "user")
+	private List<Lent> lents;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Reservation> reservations;
+
+	
+	// Getters and setters
 	
 	public int getUserId() {
 		return userId;
@@ -96,13 +93,20 @@ public class User {
 		this.admin = admin;
 	}
 
-	public List<Reservation> getUserIdList() {
-		return userIdList;
+	public List<Lent> getLents() {
+		return lents;
 	}
 
-	public void setUserIdList(List<Reservation> userIdList) {
-		this.userIdList = userIdList;
+	public void setLents(List<Lent> lents) {
+		this.lents = lents;
 	}
 
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
 	
 }

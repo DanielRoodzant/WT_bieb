@@ -1,57 +1,33 @@
 package nl.workingtalent.book;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Returned {
 
-	
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int returnedId;
-	
-	@Column (length = 10, nullable = false)
-	private String date;
-	//checken: date is string?
-	
+
+	@Column(length = 10, nullable = false)
+	private LocalDateTime returnedDateTime;
+
 	private boolean archived;
-	
-	@Column(name = "copy_id", nullable = false)
-	private int ReservationIdcopy;
 
+	// Relations
 
-	//one-to-many: userId(1) en copyId(2)
-	@ManyToMany(cascade = CascadeType.REMOVE)
-	private List<User> user;	
-	
-	public List<User> user() {
-		return user;
-	}
+	@OneToOne(optional = false)
+	private Lent lent;
 
-	public void setBookLabels(List<User> user) {
-		this.user = user;
-	}
-	//copyId(2)--> nog toevoegen
-	//@ManyToMany(cascade = CascadeType.REMOVE)
-	//private List<User> user;	
-	//
-	//public List<User> user() {
-	//	return user;
-	//}
-	//
-	//public void setBookLabels(List<User> user) {
-	//	this.user = user;
-	//}
+	// Getters and setters 
 	
-	//getters en setters
 	public int getReturnedId() {
 		return returnedId;
 	}
@@ -60,12 +36,12 @@ public class Returned {
 		this.returnedId = returnedId;
 	}
 
-	public String getDate() {
-		return date;
+	public LocalDateTime getReturnedDateTime() {
+		return returnedDateTime;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setReturnedDateTime(LocalDateTime returnedDateTime) {
+		this.returnedDateTime = returnedDateTime;
 	}
 
 	public boolean isArchived() {
@@ -75,5 +51,13 @@ public class Returned {
 	public void setArchived(boolean archived) {
 		this.archived = archived;
 	}
-		
+
+	public Lent getLent() {
+		return lent;
+	}
+
+	public void setLent(Lent lent) {
+		this.lent = lent;
+	}
+
 }

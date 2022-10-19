@@ -32,11 +32,10 @@ public class ReturnedController {
 	public void update(@PathVariable Integer id, @RequestBody Returned returned) {
 		Optional<Returned> optional = Service.findById(id);
 		Returned p = optional.get();
-		
-		if(returned.getDate().length() > 0) {
-			p.setDate(returned.getDate());
+
+		if(returned.getReturnedDateTime() != null) {
+			p.setReturnedDateTime(returned.getReturnedDateTime());
 		}
-	
 		
 		Service.registerReturned(p);
 	}

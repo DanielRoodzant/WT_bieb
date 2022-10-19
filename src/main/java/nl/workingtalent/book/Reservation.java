@@ -3,12 +3,11 @@ package nl.workingtalent.book;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Reservation {
@@ -17,14 +16,13 @@ public class Reservation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int reservationId;
 	
-	@Column(name = "user_id")
-	private int userId;
+	@ManyToOne(optional = false)
+	private User user;
 
-	@Column(name ="book_id")
-	private int bookId;
+	@ManyToOne(optional = false)
+	private Book book;
 	
-	
-	private LocalDate date = LocalDate.now();
+	private LocalDate date;
 	
 	
 	
@@ -36,22 +34,6 @@ public class Reservation {
 		this.reservationId = reservationId;
 	}
 
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public int getBookId() {
-		return bookId;
-	}
-
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
-	}
-
 	public LocalDate getDate() {
 		return date;
 	}
@@ -60,11 +42,21 @@ public class Reservation {
 		this.date = date;
 	}
 
+	public User getUser() {
+		return user;
+	}
 
-	
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-	
-	
-	
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
 	
 }
