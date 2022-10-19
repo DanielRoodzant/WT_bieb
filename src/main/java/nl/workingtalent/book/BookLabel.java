@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class BookLabel {
 
@@ -22,6 +24,7 @@ public class BookLabel {
 	
 	// Relations
 	
+	@JsonIgnore
 	@ManyToMany()
 	private List<Book> books;
 
@@ -51,7 +54,5 @@ public class BookLabel {
 	public void setBooks(List<Book> books) {
 		this.books = books;
 	}
-
-	// Getters & setters (methods)
 
 }

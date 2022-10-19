@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Returned {
 
@@ -22,7 +24,8 @@ public class Returned {
 	private boolean archived;
 
 	// Relations
-	
+
+	@JsonIgnore
 	@OneToOne(optional = false)
 	private Lent lent;
 

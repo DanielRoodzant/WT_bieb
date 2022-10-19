@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Copy {
 	
@@ -22,10 +24,12 @@ public class Copy {
 
 	
 	// Relations
-
+	
+	@JsonIgnore
 	@ManyToOne(optional = false)
 	private Book book;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "copy")
 	private List<Lent> lents;
 
