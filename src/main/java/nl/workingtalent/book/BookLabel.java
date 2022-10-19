@@ -2,7 +2,6 @@ package nl.workingtalent.book;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,23 +15,19 @@ public class BookLabel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int bookLabelId;
-	
+
 	@Column(length = 200, nullable = false)
 	private String name;
+
 	
-	// Many-to-many connection
-	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "bookLabels")
+	// Relations
+
+	@ManyToMany()
 	private List<Book> books;
+
 	
-	// Getters & setters (methods)
-	public List<Book> getBooks() {
-		return books;
-	}
-
-	public void setBooks(List<Book> books) {
-		this.books = books;
-	}
-
+	// Getters and Setters
+	
 	public int getBookLabelId() {
 		return bookLabelId;
 	}
@@ -48,10 +43,15 @@ public class BookLabel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 
-	
-	
-	
-	
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+
+	// Getters & setters (methods)
+
 }

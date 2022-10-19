@@ -2,13 +2,11 @@ package nl.workingtalent.book;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -18,15 +16,6 @@ public class Book {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int bookId;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "book_id")
-	private List<Reservation> bookIdList;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "book_copy_id")
-	private List<Copy> copyIdList;
-	
 	
 	@Column (length = 200, nullable = false)
 	private String title;
@@ -39,19 +28,20 @@ public class Book {
 	
 	private boolean archived;
 
-	// Many-to-many connection
-	@ManyToMany(cascade = CascadeType.MERGE)
-	private List<BookLabel> bookLabels;	
 	
-	// Getters & setters
-	public List<BookLabel> getBookLabels() {
-		return bookLabels;
-	}
+	// Many-to-many connection
+	@ManyToMany(mappedBy = "books")
+	private List<BookLabel> bookLabels;	
 
-	public void setBookLabels(List<BookLabel> bookLabels) {
-		this.bookLabels = bookLabels;
-	}
+	@OneToMany(mappedBy = "book")
+	private List<Reservation> reservations;
+	
+	@OneToMany(mappedBy = "book")
+	private List<Copy> copies;
 
+	
+	
+	
 	public int getBookId() {
 		return bookId;
 	}
@@ -83,7 +73,7 @@ public class Book {
 	public void setIsbn(int isbn) {
 		this.isbn = isbn;
 	}
-	
+
 	public boolean isArchived() {
 		return archived;
 	}
@@ -91,8 +81,32 @@ public class Book {
 	public void setArchived(boolean archived) {
 		this.archived = archived;
 	}
-	
+
+	public List<BookLabel> getBookLabels() {
+		return bookLabels;
+	}
+
+	public void setBookLabels(List<BookLabel> bookLabels) {
+		this.bookLabels = bookLabels;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public List<Copy> getCopies() {
+		return copies;
+	}
+
+	public void setCopies(List<Copy> copies) {
+		this.copies = copies;
+	}
 	
 
+	
 	
 }
