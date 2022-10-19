@@ -24,7 +24,7 @@ public class Reservation {
 	private int bookId;
 	
 	
-	private LocalDate date = LocalDate.now();
+	private LocalDate date;
 	
 	
 	
