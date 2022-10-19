@@ -21,7 +21,7 @@ public class BookLabel {
 
 	
 	// Relations
-
+	
 	@ManyToMany()
 	private List<Book> books;
 

@@ -22,7 +22,7 @@ public class Returned {
 	private boolean archived;
 
 	// Relations
-
+	
 	@OneToOne(optional = false)
 	private Lent lent;
 

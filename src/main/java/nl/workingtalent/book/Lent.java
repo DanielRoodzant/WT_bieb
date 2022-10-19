@@ -21,7 +21,7 @@ public class Lent {
 	private LocalDateTime lentDateTime;
 
 	
-	// Relation
+	// Relations
 	
 	@ManyToOne(optional = false)
 	private User user;
