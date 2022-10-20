@@ -26,17 +26,17 @@ public class Lent {
 	// Relations
 	
 	@JsonIgnore
-	@ManyToOne(optional = false)
-	private User user;
+	@OneToOne(optional = false)
+	private Reservation reservation;
+	
+	@OneToOne(optional = true, mappedBy = "lent")
+	private Returned returned;
 	
 	@JsonIgnore
 	@ManyToOne(optional = false)
 	private Copy copy;
 
-	@OneToOne(optional = true, mappedBy = "lent")
-	private Returned returned;
-	
-	
+
 	// Getters & setters
 
 	public int getLentId() {
@@ -55,12 +55,20 @@ public class Lent {
 		this.lentDateTime = lentDateTime;
 	}
 
-	public User getUser() {
-		return user;
+	public Reservation getReservation() {
+		return reservation;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
+	}
+
+	public Returned getReturned() {
+		return returned;
+	}
+
+	public void setReturned(Returned returned) {
+		this.returned = returned;
 	}
 
 	public Copy getCopy() {
@@ -70,5 +78,5 @@ public class Lent {
 	public void setCopy(Copy copy) {
 		this.copy = copy;
 	}
-
+	
 }

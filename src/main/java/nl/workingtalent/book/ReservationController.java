@@ -1,10 +1,12 @@
 package nl.workingtalent.book;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import nl.workingtalent.book.dto.ReserveBookDto;
+import nl.workingtalent.book.dto.UserReservationDataDto;
 
 @RestController
 @CrossOrigin (maxAge = 3600)
@@ -48,5 +51,27 @@ public class ReservationController {
         ReservationService.reservationDelete(reservation.get());
     }
 	
+	@GetMapping("reservation/user/{id}")
+    public List<UserReservationDataDto> reservationData(@PathVariable Integer id) {
+		Optional<User> optionalUser = userService.findById(id);
+		if(optionalUser.isPresent()) {
+			User user = optionalUser.get();
+				
+	        List<Reservation> reservations = user.getReservations();
+	
+	        List<UserReservationDataDto> result = new ArrayList<>();
+	        for (Reservation r : reservations) {
+	        	UserReservationDataDto dto = new UserReservationDataDto();
+	            dto.setTitle(r.getBook().getTitle());
+	            dto.setDate(r.getDate());
+	            
+	            result.add(dto);
+	        }
+        
+	        return result;
+		}
+		
+		return null;
+    }
 	
 }

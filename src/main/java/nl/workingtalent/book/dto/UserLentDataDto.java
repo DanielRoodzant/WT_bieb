@@ -1,12 +1,12 @@
 package nl.workingtalent.book.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public class UserReservationDataDto {
-	
+public class UserLentDataDto {
+
 	private String title;
 	
-	private LocalDate date;
+	private LocalDateTime date;
 	
 	// Getters & setters
 
@@ -18,11 +18,11 @@ public class UserReservationDataDto {
 		this.title = title;
 	}
 
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 	

@@ -37,9 +37,6 @@ public class User {
 	// Relations
 	
 	@OneToMany(mappedBy = "user")
-	private List<Lent> lents;
-	
-	@OneToMany(mappedBy = "user")
 	private List<Reservation> reservations;
 
 	
@@ -91,14 +88,6 @@ public class User {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
-	}
-
-	public List<Lent> getLents() {
-		return lents;
-	}
-
-	public void setLents(List<Lent> lents) {
-		this.lents = lents;
 	}
 
 	public List<Reservation> getReservations() {
