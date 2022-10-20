@@ -6,7 +6,7 @@ public class UserBookDataDto {
 
 	private String title;
 	
-	private String Author;
+	private String author;
 	
 	private LocalDate date;
 	
@@ -21,11 +21,11 @@ public class UserBookDataDto {
 	}
 	
 	public String getAuthor() {
-		return Author;
+		return author;
 	}
 	
 	public void setAuthor(String author) {
-		Author = author;
+		this.author = author;
 	}
 
 	public LocalDate getDate() {
