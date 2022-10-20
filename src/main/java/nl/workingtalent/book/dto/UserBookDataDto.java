@@ -2,9 +2,11 @@ package nl.workingtalent.book.dto;
 
 import java.time.LocalDate;
 
-public class UserReservationDataDto {
-	
+public class UserBookDataDto {
+
 	private String title;
+	
+	private String Author;
 	
 	private LocalDate date;
 	
@@ -16,6 +18,14 @@ public class UserReservationDataDto {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public String getAuthor() {
+		return Author;
+	}
+	
+	public void setAuthor(String author) {
+		Author = author;
 	}
 
 	public LocalDate getDate() {

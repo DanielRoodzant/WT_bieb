@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import nl.workingtalent.book.dto.UserLentDataDto;
+import nl.workingtalent.book.dto.UserBookDataDto;
 
 @RestController
 @CrossOrigin(maxAge = 3600)
@@ -30,35 +30,6 @@ public class LentController {
 		return Service.printLentList();
 	}
 	
-	@GetMapping(value="lent/user/{id}")
-	public List<UserLentDataDto> lentData(@PathVariable Integer id) {
-		Optional<User> optionalUser = userService.findById(id);
-		if(optionalUser.isPresent()) {
-			User user = optionalUser.get();
-				
-	        List<Reservation> reservations = user.getReservations();
-	        List<Lent> lents = new ArrayList<>();
-	        for (Reservation r : reservations) {
-	        	Lent lent = r.getLent();
-	        	
-	        	lents.add(lent);
-	        }
-	
-	        List<UserLentDataDto> result = new ArrayList<>();
-	        for (Lent l : lents) {
-	        	UserLentDataDto dto = new UserLentDataDto();
-	            dto.setTitle(l.getReservation().getBook().getTitle());
-	            dto.setDate(l.getLentDateTime());
-	            
-	            result.add(dto);
-	        }
-        
-	        return result;
-		}
-		
-		return null;
-    }
-	
 	@RequestMapping(value="Lent/register", method = RequestMethod.POST)
 	public Lent register(@RequestBody Lent lent) {
 		return Service.registerLent(lent);
@@ -69,8 +40,8 @@ public class LentController {
 		Optional<Lent> optional = Service.findById(id);
 		Lent p = optional.get();
 
-		if(lent.getLentDateTime() != null) {
-			p.setLentDateTime(lent.getLentDateTime());
+		if(lent.getLentDate() != null) {
+			p.setLentDate(lent.getLentDate());
 		}
 	
 		
@@ -81,6 +52,32 @@ public class LentController {
     public void delete(@PathVariable Integer id) {
 		Optional<Lent> lent = Service.findById(id);
         Service.lentDelete(lent.get());
+    }
+	
+	@GetMapping(value="lent/user/{id}")
+	public List<UserBookDataDto> lentData(@PathVariable Integer id) {
+		Optional<User> optionalUser = userService.findById(id);
+		if(optionalUser.isPresent()) {
+			User user = optionalUser.get();
+				
+	        List<Reservation> reservations = user.getReservations();
+	        
+	        List<UserBookDataDto> result = new ArrayList<>();
+	        for (Reservation r : reservations) {
+	        	if(r.getLent() != null && r.getLent().getReturned() == null) {
+		         	UserBookDataDto dto = new UserBookDataDto();
+			        dto.setTitle(r.getBook().getTitle());
+			        dto.setAuthor(r.getBook().getAuthor());
+		            dto.setDate(r.getLent().getLentDate());
+			        
+			        result.add(dto);
+	        	}else {
+		        	continue;
+	        	}
+	        }
+	        return result;
+		}
+		return null;
     }
 
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import nl.workingtalent.book.dto.ReserveBookDto;
-import nl.workingtalent.book.dto.UserReservationDataDto;
+import nl.workingtalent.book.dto.UserBookDataDto;
 
 @RestController
 @CrossOrigin (maxAge = 3600)
@@ -52,20 +52,25 @@ public class ReservationController {
     }
 	
 	@GetMapping("reservation/user/{id}")
-    public List<UserReservationDataDto> reservationData(@PathVariable Integer id) {
+    public List<UserBookDataDto> reservationData(@PathVariable Integer id) {
 		Optional<User> optionalUser = userService.findById(id);
 		if(optionalUser.isPresent()) {
 			User user = optionalUser.get();
 				
 	        List<Reservation> reservations = user.getReservations();
 	
-	        List<UserReservationDataDto> result = new ArrayList<>();
+	        List<UserBookDataDto> result = new ArrayList<>();
 	        for (Reservation r : reservations) {
-	        	UserReservationDataDto dto = new UserReservationDataDto();
-	            dto.setTitle(r.getBook().getTitle());
-	            dto.setDate(r.getDate());
-	            
-	            result.add(dto);
+	        	if(r.getLent() == null) {
+		        	UserBookDataDto dto = new UserBookDataDto();
+		            dto.setTitle(r.getBook().getTitle());
+		            dto.setAuthor(r.getBook().getAuthor());
+		            dto.setDate(r.getDate());
+		            
+		            result.add(dto);
+	        	}else {
+	        		continue;
+	        	}
 	        }
         
 	        return result;

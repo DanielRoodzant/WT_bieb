@@ -1,6 +1,6 @@
 package nl.workingtalent.book;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,9 +19,7 @@ public class Returned {
 	private int returnedId;
 
 	@Column(length = 10, nullable = false)
-	private LocalDateTime returnedDateTime;
-
-	private boolean archived;
+	private LocalDate returnedDate;
 
 	// Relations
 
@@ -39,20 +37,12 @@ public class Returned {
 		this.returnedId = returnedId;
 	}
 
-	public LocalDateTime getReturnedDateTime() {
-		return returnedDateTime;
+	public LocalDate getReturnedDate() {
+		return returnedDate;
 	}
 
-	public void setReturnedDateTime(LocalDateTime returnedDateTime) {
-		this.returnedDateTime = returnedDateTime;
-	}
-
-	public boolean isArchived() {
-		return archived;
-	}
-
-	public void setArchived(boolean archived) {
-		this.archived = archived;
+	public void setReturnedDate(LocalDate returnedDate) {
+		this.returnedDate = returnedDate;
 	}
 
 	public Lent getLent() {

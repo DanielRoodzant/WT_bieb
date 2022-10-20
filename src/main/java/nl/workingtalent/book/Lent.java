@@ -1,6 +1,6 @@
 package nl.workingtalent.book;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +20,7 @@ public class Lent {
 	private int lentId;
 
 	@Column(length = 10, nullable = false)
-	private LocalDateTime lentDateTime;
+	private LocalDate lentDate;
 
 	
 	// Relations
@@ -47,12 +47,12 @@ public class Lent {
 		this.lentId = lentId;
 	}
 
-	public LocalDateTime getLentDateTime() {
-		return lentDateTime;
+	public LocalDate getLentDate() {
+		return lentDate;
 	}
 
-	public void setLentDateTime(LocalDateTime lentDateTime) {
-		this.lentDateTime = lentDateTime;
+	public void setLentDate(LocalDate lentDate) {
+		this.lentDate = lentDate;
 	}
 
 	public Reservation getReservation() {
