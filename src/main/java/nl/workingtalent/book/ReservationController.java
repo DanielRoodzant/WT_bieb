@@ -69,10 +69,11 @@ public class ReservationController {
 		            
 		            result.add(dto);
 	        	}else {
+	        		
 	        		continue;
 	        	}
 	        }
-        
+    
 	        return result;
 		}
 		

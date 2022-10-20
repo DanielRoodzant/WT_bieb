@@ -72,11 +72,14 @@ public class LentController {
 			        
 			        result.add(dto);
 	        	}else {
+	        		
 		        	continue;
 	        	}
 	        }
+	        
 	        return result;
 		}
+		
 		return null;
     }
 
