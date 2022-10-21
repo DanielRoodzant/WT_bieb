@@ -31,7 +31,8 @@ public class Book {
 	private boolean archived;
 
 	
-	// Many-to-many connection
+	// Relations 
+	
 	@ManyToMany(mappedBy = "books")
 	private List<BookLabel> bookLabels;	
 
@@ -43,7 +44,7 @@ public class Book {
 	private List<Copy> copies;
 
 	
-	
+	// Getters & setters 
 	
 	public int getBookId() {
 		return bookId;
@@ -108,8 +109,5 @@ public class Book {
 	public void setCopies(List<Copy> copies) {
 		this.copies = copies;
 	}
-	
-
-	
 	
 }

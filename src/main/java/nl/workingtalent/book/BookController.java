@@ -78,7 +78,7 @@ public class BookController {
 		Service.registerBook(p);
 	}
 	
-	// boekenzoekfunctie
+	// boeken zoekfunctie
 	@RequestMapping(value="book/{id}")    
 	public Optional<Book> findBook(@PathVariable Integer id) {        
 		return Service.findById(id);    

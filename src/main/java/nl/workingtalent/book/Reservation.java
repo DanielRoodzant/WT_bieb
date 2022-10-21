@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Reservation {
@@ -16,15 +19,20 @@ public class Reservation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int reservationId;
 	
+	private LocalDate date;
+	
+	@JsonIgnore
 	@ManyToOne(optional = false)
 	private User user;
 
+	@JsonIgnore
 	@ManyToOne(optional = false)
 	private Book book;
 	
-	private LocalDate date;
+	@OneToOne(optional = true, mappedBy = "reservation")
+	private Lent lent;
 	
-	
+	// Getters & setters
 	
 	public int getReservationId() {
 		return reservationId;
@@ -56,6 +64,14 @@ public class Reservation {
 
 	public void setBook(Book book) {
 		this.book = book;
+	}
+
+	public Lent getLent() {
+		return lent;
+	}
+
+	public void setLent(Lent lent) {
+		this.lent = lent;
 	}
 
 	

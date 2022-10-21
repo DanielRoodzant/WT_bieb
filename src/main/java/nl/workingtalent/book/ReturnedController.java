@@ -1,15 +1,19 @@
 package nl.workingtalent.book;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import nl.workingtalent.book.dto.UserBookDataDto;
 
 @RestController
 @CrossOrigin(maxAge = 3600)
@@ -17,6 +21,9 @@ public class ReturnedController {
 
 	@Autowired
 	private ReturnedService Service;
+	
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(value="returned")
 	public List<Returned> demo() {
@@ -33,8 +40,8 @@ public class ReturnedController {
 		Optional<Returned> optional = Service.findById(id);
 		Returned p = optional.get();
 
-		if(returned.getReturnedDateTime() != null) {
-			p.setReturnedDateTime(returned.getReturnedDateTime());
+		if(returned.getReturnedDate() != null) {
+			p.setReturnedDate(returned.getReturnedDate());
 		}
 		
 		Service.registerReturned(p);
@@ -46,16 +53,32 @@ public class ReturnedController {
         Service.returnedDelete(returned.get());
     }
 	
-	@RequestMapping(value="returned/archive/{id}", method = RequestMethod.PUT)
-	public void archive(@PathVariable Integer id) {
-		Optional<Returned> optional = Service.findById(id);
-		Returned p = optional.get();
-		
-		if(p.isArchived() == false) {
-			p.setArchived(true);
-		}else {
-			p.setArchived(false);
+	@GetMapping(value="returned/user/{id}")
+	public List<UserBookDataDto> returnedData(@PathVariable Integer id) {
+		Optional<User> optionalUser = userService.findById(id);
+		if(optionalUser.isPresent()) {
+			User user = optionalUser.get();
+				
+	        List<Reservation> reservations = user.getReservations();
+	        
+	        List<UserBookDataDto> result = new ArrayList<>();
+	        for (Reservation r : reservations) {
+	        	if(r.getLent() != null && r.getLent().getReturned() != null) {
+		         	UserBookDataDto dto = new UserBookDataDto();
+			        dto.setTitle(r.getBook().getTitle());
+			        dto.setAuthor(r.getBook().getAuthor());
+		            dto.setDate(r.getLent().getReturned().getReturnedDate());
+			            
+			        result.add(dto);
+	        	}else {
+	        		
+		        	continue;
+	        	}
+	        }
+	        
+	        return result;
 		}
-		Service.registerReturned(p);
-	}
+		
+		return null;
+    }
 }

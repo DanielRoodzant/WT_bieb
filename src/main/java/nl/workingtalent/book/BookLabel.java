@@ -55,6 +55,4 @@ public class BookLabel {
 		this.books = books;
 	}
 
-	// Getters & setters (methods)
-
 }
