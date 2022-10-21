@@ -80,4 +80,35 @@ public class ReservationController {
 		return null;
     }
 	
+	
+	
+	@GetMapping("reservation/book/{id}")
+    public List<UserBookDataDto> reservationBook(@PathVariable Integer id) {
+		Optional<Book> optionalBook = bookService.findById(id);
+		if(optionalBook.isPresent()) {
+			Book book = optionalBook.get();
+				
+	        List<Reservation> reservations = book.getReservations();
+	
+	        List<UserBookDataDto> result = new ArrayList<>();
+	        for (Reservation r : reservations) {
+	        	if(r.getLent() == null) {
+	        		UserBookDataDto dto = new UserBookDataDto();
+		            dto.setTitle(r.getBook().getTitle());
+		            dto.setAuthor(r.getBook().getAuthor());
+		            dto.setDate(r.getDate());
+		            
+		            result.add(dto);
+	        	}else {
+	        		
+	        		continue;
+	        	}
+	        }
+    
+	        return result;
+		}
+		
+		return null;
+    }
+	
 }
