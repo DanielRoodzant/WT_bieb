@@ -3,12 +3,14 @@ package nl.workingtalent.book;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Reservation {
@@ -17,16 +19,20 @@ public class Reservation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int reservationId;
 	
-	@Column(name = "user_id")
-	private int userId;
+	private LocalDate date;
+	
+	@JsonIgnore
+	@ManyToOne(optional = false)
+	private User user;
 
-	@Column(name ="book_id")
-	private int bookId;
+	@JsonIgnore
+	@ManyToOne(optional = false)
+	private Book book;
 	
+	@OneToOne(optional = true, mappedBy = "reservation")
+	private Lent lent;
 	
-	private LocalDate date = LocalDate.now();
-	
-	
+	// Getters & setters
 	
 	public int getReservationId() {
 		return reservationId;
@@ -34,22 +40,6 @@ public class Reservation {
 	
 	public void setReservationId(int reservationId) {
 		this.reservationId = reservationId;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public int getBookId() {
-		return bookId;
-	}
-
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
 	}
 
 	public LocalDate getDate() {
@@ -60,11 +50,29 @@ public class Reservation {
 		this.date = date;
 	}
 
+	public User getUser() {
+		return user;
+	}
 
-	
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-	
-	
-	
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	public Lent getLent() {
+		return lent;
+	}
+
+	public void setLent(Lent lent) {
+		this.lent = lent;
+	}
+
 	
 }
