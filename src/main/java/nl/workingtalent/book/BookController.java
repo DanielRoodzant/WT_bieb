@@ -81,17 +81,18 @@ public class BookController {
 		Service.registerBook(p);
 	}
 	
+
+	@PostMapping("book/search")
+	public List<Book> search(@RequestBody SearchBookDto dto ) {
+		return Service.search(dto.getZoekterm());
+	}
+
 	// boeken zoekfunctie
 	@RequestMapping(value="book/{id}")    
 	public Optional<Book> findBook(@PathVariable Integer id) {        
 		return Service.findById(id);    
 		}
-	    
 
-	@PostMapping("book/search")
-	public List<Book> search(@RequestBody SearchBookDto dto) {
-		return Service.search(dto.getZoekterm());
-	}
 
 	
 

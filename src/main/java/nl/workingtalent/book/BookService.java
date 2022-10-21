@@ -28,8 +28,10 @@ public class BookService {
         repo.delete(book);
     }
 
+
 	public List<Book> search(String search) {
 		return repo.findByTitleLikeOrAuthorLike("%" + search + "%", "%" + search + "%");
+
 	}
 
 }
