@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import nl.workingtalent.book.dto.BookReservationDto;
 import nl.workingtalent.book.dto.ReserveBookDto;
 import nl.workingtalent.book.dto.UserBookDataDto;
 
@@ -83,20 +84,20 @@ public class ReservationController {
 	
 	
 	@GetMapping("reservation/book/{id}")
-    public List<UserBookDataDto> reservationBook(@PathVariable Integer id) {
+    public List<BookReservationDto> reservationBook(@PathVariable Integer id) {
 		Optional<Book> optionalBook = bookService.findById(id);
 		if(optionalBook.isPresent()) {
 			Book book = optionalBook.get();
 				
 	        List<Reservation> reservations = book.getReservations();
 	
-	        List<UserBookDataDto> result = new ArrayList<>();
+	        List<BookReservationDto> result = new ArrayList<>();
 	        for (Reservation r : reservations) {
 	        	if(r.getLent() == null) {
-	        		UserBookDataDto dto = new UserBookDataDto();
-		            dto.setTitle(r.getBook().getTitle());
-		            dto.setAuthor(r.getBook().getAuthor());
-		            dto.setDate(r.getDate());
+	        		BookReservationDto dto = new BookReservationDto();
+		            dto.setFirstName(r.getUser().getFirstName());
+		            dto.setLastName(r.getUser().getFirstName());
+		            dto.setDate(r.getDate()); // Neemt hij hier de Date van Reservering?
 		            
 		            result.add(dto);
 	        	}else {
