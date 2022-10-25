@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import nl.workingtalent.book.dto.BookReservationDto;
 import nl.workingtalent.book.dto.UserBookDataDto;
 
 @RestController
@@ -24,6 +25,10 @@ public class LentController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private BookService bookService;
+	
 	
 	@RequestMapping(value="lent")
 	public List<Lent> demo() {
@@ -83,4 +88,34 @@ public class LentController {
 		return null;
     }
 
+	
+	@GetMapping(value="lent/book/{id}")
+	public List<BookReservationDto> lentBook(@PathVariable Integer id) {
+		Optional<Book> optionalBook = bookService.findById(id);
+		if(optionalBook.isPresent()) {
+			Book book = optionalBook.get();
+				
+	        List<Reservation> reservations = book.getReservations();
+	        
+	        List<BookReservationDto> result = new ArrayList<>();
+	        for (Reservation r : reservations) {
+	        	if(r.getLent() != null && r.getLent().getReturned() == null) {
+		         	BookReservationDto dto = new BookReservationDto();
+			        dto.setFirstName(r.getUser().getFirstName());
+			        dto.setLastName(r.getUser().getLastName());
+		            dto.setDate(r.getLent().getLentDate());
+			        
+			        result.add(dto);
+	        	}else {
+	        		
+		        	continue;
+	        	}
+	        }
+	        
+	        return result;
+		}
+		
+		return null;
+    }
+	
 }
