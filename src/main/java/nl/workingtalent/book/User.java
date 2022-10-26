@@ -1,10 +1,13 @@
 package nl.workingtalent.book;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 // @Entity: moet 1 van kolommen zijn in database, anders geen koppeling database
 @Entity
@@ -15,7 +18,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 	
-// @column:	columnlength en of waarde null mag zijn (false=altijd first name)
+	// @column:	columnlength en of waarde null mag zijn (false=altijd first name)
 	@Column(length = 100, nullable = false)
 	private String firstName;
 	
@@ -28,9 +31,16 @@ public class User {
 	@Column(length = 200, nullable = false)
 	private String password;
 	
-	
 	private boolean admin;
 
+	
+	// Relations
+	
+	@OneToMany(mappedBy = "user")
+	private List<Reservation> reservations;
+
+	
+	// Getters and setters
 	
 	public int getUserId() {
 		return userId;
@@ -78,6 +88,14 @@ public class User {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
 	}
 	
 }

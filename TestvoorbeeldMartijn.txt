@@ -1,0 +1,20 @@
+Dit is een testvoorbeeld van het ophalen van data in de backend (Controller):
+
+
+@GetMapping("book/martijn")
+    public List<ReservationSearchResultDto> test() {
+        List<Reservation> reservations = ReservationService.findAllReservedReservations();
+
+        List<ReservationSearchResultDto> result = new ArrayList<>();
+        for (Reservation r : reservations) {
+            ReservationSearchResultDto dto = new ReservationSearchResultDto();
+            dto.setBooktTitle(r.getBook().getTitle());
+            dto.setBookAuthor(r.getBook().getAuthor());
+            dto.setReservationDateTime(r.getDate());
+            dto.setName(r.getUser().getFirstName() + " " + r.getUser().getLastName());
+            
+            result.add(dto);
+        }
+        
+        return result;
+    }

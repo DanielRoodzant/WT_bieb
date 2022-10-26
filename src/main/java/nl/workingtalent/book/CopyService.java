@@ -7,25 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
-	
+public class CopyService {
+
 	@Autowired
-	private UserRepository repo;
+	private CopyRepository repo;
 	
-	public List<User> printUserList(){
+	public List<Copy> printCopyList(){
 		return repo.findAll();
 	}
 	
-	public Optional<User> findById(Integer id){
+	public Optional<Copy> findById(Integer id){
 		return repo.findById(id);
 	}
 	
-	public User registerUser(User user) {
-		return repo.save(user);
+	public Copy registerCopy(Copy copy) {
+		return repo.save(copy);
 	}
 	
-	public void userDelete(User user) {
-        repo.delete(user);
+	public void copyDelete(Copy copy) {
+        repo.delete(copy);
     }
+	
+	
 	
 }

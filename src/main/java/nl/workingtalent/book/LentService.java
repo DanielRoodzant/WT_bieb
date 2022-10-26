@@ -7,25 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class LentService {
 	
 	@Autowired
-	private UserRepository repo;
+	private LentRepository repo;
 	
-	public List<User> printUserList(){
+	public List<Lent> printLentList(){
 		return repo.findAll();
 	}
 	
-	public Optional<User> findById(Integer id){
+	public Optional<Lent> findById(Integer id){
 		return repo.findById(id);
 	}
 	
-	public User registerUser(User user) {
-		return repo.save(user);
+	public Lent registerLent(Lent lent) {
+		return repo.save(lent);
 	}
 	
-	public void userDelete(User user) {
-        repo.delete(user);
+	public void lentDelete(Lent lent) {
+        repo.delete(lent);
     }
-	
+
 }
