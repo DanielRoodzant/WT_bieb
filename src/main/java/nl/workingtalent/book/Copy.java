@@ -25,7 +25,7 @@ public class Copy {
 	
 	// Relations
 	
-	@JsonIgnore
+	
 	@ManyToOne(optional = false)
 	private Book book;
 	
