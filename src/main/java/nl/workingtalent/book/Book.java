@@ -40,6 +40,7 @@ public class Book {
 	@OneToMany(mappedBy = "book")
 	private List<Reservation> reservations;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "book")
 	private List<Copy> copies;
 
