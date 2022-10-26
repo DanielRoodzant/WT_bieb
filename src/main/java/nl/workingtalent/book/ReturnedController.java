@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import nl.workingtalent.book.dto.BookReservationDto;
 import nl.workingtalent.book.dto.UserBookDataDto;
 
 @RestController
@@ -24,6 +25,10 @@ public class ReturnedController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private BookService bookService;
+	
 	
 	@RequestMapping(value="returned")
 	public List<Returned> demo() {
@@ -53,6 +58,8 @@ public class ReturnedController {
         Service.returnedDelete(returned.get());
     }
 	
+	
+	// Which Book has been returned by user ID
 	@GetMapping(value="returned/user/{id}")
 	public List<UserBookDataDto> returnedData(@PathVariable Integer id) {
 		Optional<User> optionalUser = userService.findById(id);
@@ -81,4 +88,39 @@ public class ReturnedController {
 		
 		return null;
     }
+	
+	
+	
+	
+	// Which User has returned book ordered by book Id
+	
+	@GetMapping(value="returned/book/{id}")
+	public List<BookReservationDto> returnedBook(@PathVariable Integer id) {
+		Optional<Book> optionalBook = bookService.findById(id);
+		if(optionalBook.isPresent()) {
+			Book book = optionalBook.get();
+				
+	        List<Reservation> reservations = book.getReservations();
+	        
+	        List<BookReservationDto> result = new ArrayList<>();
+	        for (Reservation b : reservations) {
+	        	if(b.getLent() != null && b.getLent().getReturned() != null) {
+	        		BookReservationDto dto = new BookReservationDto();
+			        dto.setFirstName(b.getUser().getFirstName());
+			        dto.setLastName(b.getUser().getLastName());
+		            dto.setDate(b.getLent().getReturned().getReturnedDate());
+			            
+			        result.add(dto);
+	        	}else {
+	        		
+		        	continue;
+	        	}
+	        }
+	        
+	        return result;
+		}
+		
+		return null;
+    }
+	
 }

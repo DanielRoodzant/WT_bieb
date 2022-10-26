@@ -6,6 +6,10 @@ public class ReserveBookDto {
 	
 	private int userId;
 
+	
+	
+	// Getters and Setters
+	
 	public int getBookId() {
 		return bookId;
 	}
